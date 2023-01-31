@@ -12,7 +12,7 @@ public class PropertiesInjectionDemo {
 		// call fotune method
 		System.out.println(swimCoach.getDailyFortune());
 		// call user detail function
-		swimCoach.getDetails();
+
 		// close context
 		context.close();
 	}

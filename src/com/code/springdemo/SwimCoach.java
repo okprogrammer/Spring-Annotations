@@ -1,15 +1,13 @@
 package com.code.springdemo;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
+@PropertySource("classpath:sport.properties")
 public class SwimCoach implements Coach {
 
-	@Autowired
-	@Qualifier("randomFortuneService")
 	private FortuneService fortuneService;
 
 	@Value("${foo.email}")
@@ -17,9 +15,13 @@ public class SwimCoach implements Coach {
 	@Value("${foo.team}")
 	private String team;
 
+	public SwimCoach(FortuneService sadFortuneService) {
+		this.fortuneService = sadFortuneService;
+	}
+
 	@Override
 	public String getDailyWorkout() {
-		return team + "doing dail workout " + email;
+		return "Swim doing dail workout 1000 meters as a warm up";
 	}
 
 	@Override
@@ -27,9 +29,12 @@ public class SwimCoach implements Coach {
 		return fortuneService.getFortune();
 	}
 
-	public void getDetails() {
-		System.out.println("Team Name is: " + team);
-		System.out.println("Team email id is: " + email);
+	public String getEmail() {
+		return email;
+	}
+
+	public String getTeam() {
+		return team;
 	}
 
 }
